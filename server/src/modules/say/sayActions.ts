@@ -1,7 +1,8 @@
 import type { RequestHandler } from "express";
 
 const sayWelcome: RequestHandler = (req, res) => {
-  res.send("Welcome to the server!");
+  console.info(req.query);
+  res.send(`Welcome to the server!"${req.query.name}!`);
 };
 
 export default { sayWelcome };
