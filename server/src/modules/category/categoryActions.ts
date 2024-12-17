@@ -1,4 +1,4 @@
-// Some data to make the trick
+import categoryRepository from "./categoryRepository";
 
 const categories = [
   {
@@ -11,9 +11,7 @@ const categories = [
   },
 ];
 import type { RequestHandler } from "express";
-const browse: RequestHandler = (req, res) => {
-  res.json(categories);
-};
+
 const read: RequestHandler = (req, res) => {
   const parsedId = Number.parseInt(req.params.id);
 
@@ -23,6 +21,11 @@ const read: RequestHandler = (req, res) => {
   } else {
     res.sendStatus(404);
   }
+};
+const browse: RequestHandler = async (req, res) => {
+  const categoriesFromDB = await categoryRepository.readAll();
+
+  res.json(categoriesFromDB);
 };
 // Declare the actions
 
